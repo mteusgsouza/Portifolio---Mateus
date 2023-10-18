@@ -1,24 +1,16 @@
-import moment from 'moment'
+import { fetchGithubUser } from '@/lib/fetchers/fetchGithubUser'
 import React from 'react'
+import IntroContent from './content'
 
-function IntroSection() {
+async function Intro() {
+  const userData = fetchGithubUser({ username: 'mteusgsouza' })
+  const user = await userData
+
   return (
-    <div id="intro" className="h-screen">
-      <div className="container">
-        <h1>Sobre Mateus</h1>
-        <p>
-          Sou de Belo Horizonte - MG, tenho{' '}
-          {moment().diff(moment('1996-03-03'), 'years')} anos, sou bacharel em
-          Sistemas de Informação e técnico em Computação Gráfica, ambas
-          formações foram pela faculdade Pitágoras.
-        </p>
-        <p>
-          Me considero alguém responsável, esforçado e sincero. Gosto de
-          aprender sobre diversos assuntos, principalmente sobre as tecnologia.
-        </p>
-      </div>
-    </div>
+    <section id="intro" className="flex items-center justify-center pt-36">
+      <IntroContent user={user} />
+    </section>
   )
 }
 
-export default IntroSection
+export default Intro
